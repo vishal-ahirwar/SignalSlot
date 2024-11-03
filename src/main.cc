@@ -14,7 +14,7 @@ public:
     template <class T>
     void connect(T *instance, void (T::*func)(Args...))
     {
-        _slots.push_back([&](Args... args) -> void { (instance->*func)(args...); });
+        _slots.push_back([=](Args... args) -> void { (instance->*func)(args...); });
     };
 
     void connect(std::function<void(Args...)> func) { _slots.push_back(func); };
