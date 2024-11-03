@@ -14,7 +14,7 @@ public:
     template <class T>
     void connect(T *instance, void (T::*func)(Args...))
     {
-        _slots.push_back([=](Args... args) -> void { (instance->*func)(args...); });
+        _slots.push_back([&](Args... args) -> void { (instance->*func)(args...); });
     };
 
     void connect(std::function<void(Args...)> func) { _slots.push_back(func); };
@@ -29,7 +29,7 @@ public:
 
 int main(int argc, char *argv[])
 {
-    Signal<> signal;
+    Signal signal;
     Slot slot;
     signal.connect(&slot, &Slot::slayMe);
     signal.connect([=]() -> void { std::cout << "hello,there!\n"; });
