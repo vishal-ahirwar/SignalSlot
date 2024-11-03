@@ -29,7 +29,7 @@ public:
 
 int main(int argc, char *argv[])
 {
-    Signal<> signal;
+    Signal signal;
     Slot slot;
     signal.connect(&slot, &Slot::slayMe);
     signal.connect([=]() -> void { std::cout << "hello,there!\n"; });
